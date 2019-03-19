@@ -3,9 +3,9 @@
 __author__ = 'ma_keling'
 # Version     : 1.0.0
 # Start Time  : 2018-12-13
-# Update Time :
+# Update Time : 2019-3-19
 # Change Log  :
-##      1.
+##      1. repair lod value:lod = id_array.pop().split(',').pop().strip()
 ##      2.
 ##      3.
 
@@ -86,9 +86,9 @@ def updateZoomLinux(vtpk,root):
                 lod = ""
 
                 if len(id_array) == 3:
-                    lod = id_array[len(id_array) - 2].split(',').pop()
+                    lod = id_array[len(id_array) - 2].split(',').pop().strip()
                 elif len(id_array) == 2:
-                    lod = id_array.pop().split(',').pop()
+                    lod = id_array.pop().split(',').pop().strip()
 
                 if lod != "":
                     if lod.isdigit():
@@ -125,9 +125,9 @@ def updateZoomWin(vtpk,root):
                 lod = ""
 
                 if len(id_array) == 3:
-                    lod = id_array[len(id_array) - 2].split(',').pop()
+                    lod = id_array[len(id_array) - 2].split(',').pop().strip()
                 elif len(id_array) == 2:
-                    lod = id_array.pop().split(',').pop()
+                    lod = id_array.pop().split(',').pop().strip()
 
                 if lod != "":
                     if lod.isdigit():
@@ -176,20 +176,30 @@ def zip_read(vtpk):
 
 def batch_repairs(in_vtpk):
     startTime = time.time()
+
     timeStampName = time.strftime('%Y_%m_%d %H:%M:%S', time.localtime(time.time()))
+
     print("Start Repair VTPK at: {0}".format(timeStampName))
+
     arcpy.AddMessage("Start Repair VTPK at: {0}".format(timeStampName))
+
     root = zip_read(in_vtpk)
+
     updateZoomWin(in_vtpk, root)
 
     endTime = time.time()
+
     print("Repair VTPK finished, elapsed: {0} Seconds.eter..".format(str(endTime - startTime)))
+
     arcpy.AddMessage("Repair VTPK finished, elapsed: {0} Seconds.eter..".format(str(endTime - startTime)))
+
     print("\n")
+
     arcpy.AddMessage("\n")
 
 def execute():
     in_vtpk = arcpy.GetParameterAsText(0)
+
     arcpy.AddMessage("Input vtpk path: {0}.".format(in_vtpk))
 
     # in_vtpk = r"C:\Users\Administrator\Documents\ArcGIS\Projects\spatialAnalysis\vtpks\smart04.vtpk"

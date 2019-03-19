@@ -4,8 +4,9 @@ __author__ = 'ma_keling'
 # Version     : 1.0.0
 # Start Time  : 2018-12-6
 # Update Time : 2018-12-13
+#               2019-03-19
 # Change Log  :
-##      1.
+##      1. update layer definition value: lyr.definitionQuery = field_name + ' < 100000'
 ##      2.
 ##      3.
 
@@ -107,7 +108,7 @@ def repair_symbology_general(inMap, inLayer):
         for field in fields:
             if field.type == "OID":
                 field_name = field.name
-                lyr.definitionQuery = field_name + ' < 10000'
+                lyr.definitionQuery = field_name + ' < 100000'
 
         sym = lyr.symbology
         main_renderer = sym.renderer
@@ -135,7 +136,7 @@ def repair_polygon_symbology(inMap, inLayer):
         for field in fields:
             if field.type == "OID":
                 field_name = field.name
-                lyr.definitionQuery = field_name + ' < 10000'
+                lyr.definitionQuery = field_name + ' < 100000'
 
         if ds_path.split(".")[1] == 'shp':
             bgLayer = ds_path.split(".")[0] + "_background"
